@@ -1,0 +1,36 @@
+<dialog id="categoriesModal">
+
+    <h2 id="modalTitle">Cadastro de Categorias</h2>
+
+    <form id="categoriesForm">
+        <label for="name">Nome da categoria</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">Descrição</label>
+        <input type="text" id="description" name="description" required>
+
+        <button
+            id="btnSubmit"
+            type="submit">
+            Criar
+        </button>
+        <button 
+            id="btnCancel"
+            type="button">
+            Cancelar
+        </button>
+
+    </form>
+</dialog>
+
+<dialog id="deleteCategoriesModal">
+
+    <h2>Excluir categoria</h2>
+
+        <p id="deleteMessage">Tem certeza que deseja excluir esta categoria?
+        </p>
+
+    <button id="btnCancelDelete" type="button">Cancelar</button>
+    <button id="btnConfirmDelete" type="button">Excluir</button>
+
+</dialog>
