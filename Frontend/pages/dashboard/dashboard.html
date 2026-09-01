@@ -15,7 +15,7 @@
         <div class="row">
             <aside class="col-md3 col-lg-2 bg-dark text-white min-vh-100">
                 <h4 class="md-4">Sistema de controle de equipamentos</h4>
-            <nav class="nav flex-column">
+                <nav class="nav flex-column">
                 <a class="nav-link text-white active" href="#">Dashboard</a>
                 <a class="nav-link text-white active" href="#">Equipamentos</a>
                 <a class="nav-link text-white active" href="#">Categorias</a>
@@ -25,12 +25,22 @@
             </nav>
             </aside>
             <main class="col-md-9 col-lg-10 p-4">
+                <form class="row g-3 mb-4">
+                    <div class="col-mb-80">
+                        <input type="text" class="form-control" placeholder="Pesquisar equipamento">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary w-100">
+                         Pesquisar                      
+                        </button>
+                    </div>
+                </form>
                 <div class="row g-4 mb-4">
                     <div class="col-md-4">
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h6>Equipamentos Ativos</h6>
-                                <h2 id="activesTotal">48</h2> 
+                                <h2 id="activesTotal">10</h2> 
                             </div>
                         </div>
                     </div>
@@ -39,6 +49,14 @@
                             <div class="card-body">
                                 <h6>Equipamentos Inativos</h6>
                                 <h2>20</h2> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6>Em Manutenção</h6>
+                                <h2 id="maintenanceEquipmentsTotal">10</h2> 
                             </div>
                         </div>
                     </div>
