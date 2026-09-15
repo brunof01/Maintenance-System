@@ -4,38 +4,48 @@ const systemName = "Sistema de Controle de Manutenção";
 
 // let activeEquipments = 48;
 let maintenanceEquipments = 5;
-//let preventiveMaintenance = 10;
+// let preventiveMaintenance = 10;
 
 console.log("Nome do sistema: " + systemName);
 console.info("Em manutenção: " + maintenanceEquipments);
 
 const equipments = [
-    { id:1,
-    name: "Compressor",
-    local: "Oficina",
-    status: "active",
-    patrimony: "12-PP"
-},{ id:2,
-    name: "Torno",
-    local: "Oficina",
-    status: "active",
-    patrimony: "1-PP"
-},{ id:3,
-    name: "Gerador",
-    local: "Casa de Maquinas",
-    status: "inactive",
-    patrimony: "65-PP"
-},{ id:4,
-    name: "Gerador Grande",
-    local: "Casa de Maquinas",
-    status: "maintenance",
-    patrimony: "70-PP"
-},{ id:5,
-    name: "Gerador Grande 5",
-    local: "Casa de Maquinas",
-    status: "maintenance",
-    patrimony: "70-PP"
-}];
+    {
+        id:1,
+        name: "Compressor",
+        local: "Oficina",
+        status: "active",
+        patrimony: "12-PP"
+    },
+    { 
+        id:2,
+        name: "Torno",
+        local: "Oficina",
+        status: "active",
+        patrimony: "1-PP"
+    },
+    { 
+        id:3,
+        name: "Gerador",
+        local: "Casa de Maquinas",
+        status: "inactive",
+        patrimony: "65-PP"
+    },
+    { 
+        id:4,
+        name: "Gerador Grande",
+        local: "Casa de Maquinas",
+        status: "maintenance",
+        patrimony: "70-PP"
+    },
+    { 
+        id:5,
+        name: "Gerador Grande 5",
+        local: "Casa de Maquinas",
+        status: "maintenance",
+        patrimony: "70-PP"
+    }
+];
 
 console.table(equipments);
 
@@ -52,24 +62,24 @@ const modal = new bootstrap.Modal(modalElement);
 console.log("activeTotal: "+ activeTotal.textContent);
 //activeTotal.textContent = 50;
 
-function dashboardRefresh() {
-    
-    const actives = equipments.filter(
-        equipment => equipment.status === "active"
-    ).length;
+//  function dashboardRefresh() {
+//    
+//    const actives = equipments.filter(
+//        equipment => equipment.status === "active"
+//    ).length;
+//
+//    const inMaintenance = equipments.filter(
+//        equipment => equipment.status === "maintenance"
+//    ).length;
+//
+//    activeTotal.textContent = actives;
+//    maintenanceEquipmentsTotal.textContent = inMaintenance;
+//
+//    console.log("Dashboard atualizado");
+//
+//}
 
-    const inMaintenance = equipments.filter(
-        equipment => equipment.status === "maintenance"
-    ).length;
-
-    activeTotal.textContent = actives;
-    maintenanceEquipmentsTotal.textContent = inMaintenance;
-
-    console.log("Dashboard atualizado");
-
-}
-
-dashboardRefresh();
+// dashboardRefresh();
 
 function equipmentsTableRender(list) {
     
@@ -128,7 +138,7 @@ btnSave.addEventListener("click", function(){
 
     equipments.push(newEquipment);
     equipmentsTableRender(equipments);
-    dashboardRefresh();
+    // dashboardRefresh();
 
 
     modal.hide();
@@ -140,15 +150,37 @@ function equipmentDelete(id){
         equipment => equipment.id === id
     );
     
-    if(index === -1){
+    if (index === -1){
         console.error("Equipamento não encontrado:", id);
         return;
     }
 
     equipments.splice(index,1);
     equipmentsTableRender(equipments);
-    dashboardRefresh();
+    // dashboardRefresh();
     
     console.log("Equipamento removido",id);
 
 }
+
+async function dashboardLoad(){
+    try{
+        const response = await fetch("http://localhost:3000/dashboard");
+        if (!response.ok){
+            throw new Error("Não foi possível carregar o dashboard")
+        }
+        const data = await response.json();
+        console.log("Dados recebidos: ",data);
+        const actives = data.activeEquips;        
+        const inMaintenance = data.inMaintenance;
+        const preventiveEquips = data.preventiveMaintenance;
+            
+        activeTotal.textContent = actives;
+        maintenanceEquipmentsTotal.textContent = inMaintenance;
+        preventiveTotal.textContent = preventiveEquips;
+
+    } catch(error){
+        console.error("Erro ao carregar dashboard: ", error)
+    };
+}
+dashboardLoad();
