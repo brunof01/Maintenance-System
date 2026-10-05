@@ -87,8 +87,9 @@ function equipmentsTableRender(list) {
 
     list.forEach(equipment => {
         const row = document.createElement("tr");
+        const name = equipment.nome ?? equipment.name ?? "";
 
-        row.innerHTML = `<td>${equipment.name}</td>
+        row.innerHTML = `<td>${name}</td>
         <td>${equipment.local}</td>
         <td>${equipment.status}</td>
         <td>
@@ -107,8 +108,10 @@ equipmentsTableRender(equipments);
 searchInput.addEventListener("input", function () {
     const term = searchInput.value.toLowerCase();
     
-    const result = equipments.filter(equipment =>
-        equipment.name.toLowerCase().includes(term));
+    const result = equipments.filter(equipment => {
+        const name = equipment.nome ?? equipment.name ?? "";
+        return name.toLowerCase().includes(term);
+    });
 
     equipmentsTableRender(result);
 });
@@ -171,7 +174,7 @@ async function dashboardLoad(){
         }
         const data = await response.json();
         console.log("Dados recebidos: ",data);
-        const actives = data.activeTotal;
+        const actives = data.activeEquipaments ?? data.activeTotal;
         const inMaintenance = data.inMaintenance;
         const preventiveEquips = data.preventiveMaintenance;
             

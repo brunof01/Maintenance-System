@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 
@@ -10,19 +9,19 @@ app.use(cors({
 
 app.get('/dashboard', (req, res) => {
  
-    if (req.url === "/dashboard"){
-    const indicators = {
-            activeEquipaments: 48,
-            inMaintenance: 7,
-            preventiveMaintenance: 2
-        };
-    res.writeHead(200, {
-         "Content-Type": "application/json"
-    });
+	if (req.url === "/dashboard"){
+	const indicators = {
+			activeEquipaments: 48,
+			inMaintenance: 7,
+			preventiveMaintenance: 2
+	};
+	res.writeHead(200, {
+		"Content-Type": "application/json"
+	});
 
-     res.end(JSON.stringify(indicators));
-     return;
-    }
+	 res.end(JSON.stringify(indicators));
+	 return;
+	}
 });
 
 app.listen(3000);
