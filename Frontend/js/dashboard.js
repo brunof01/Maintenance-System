@@ -171,7 +171,7 @@ async function dashboardLoad(){
         }
         const data = await response.json();
         console.log("Dados recebidos: ",data);
-        const actives = data.activeEquips;        
+        const actives = data.activeTotal;
         const inMaintenance = data.inMaintenance;
         const preventiveEquips = data.preventiveMaintenance;
             
